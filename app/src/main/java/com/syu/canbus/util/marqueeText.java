@@ -1,0 +1,23 @@
+package com.syu.canbus.util;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.TextView;
+
+public class marqueeText extends TextView {
+    public marqueeText(Context context) {
+        super(context);
+    }
+
+    public marqueeText(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public marqueeText(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public boolean isFocused() {
+        return true;
+    }
+}
