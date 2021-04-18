@@ -1,9 +1,13 @@
 package com.syu.canbus.module.canbus;
 
 import android.os.RemoteException;
+import android.util.Log;
+
 import com.syu.ipc.IModuleCallback;
 
 public class ModuleCallbackCanbusProxy extends IModuleCallback.Stub {
+    private static final String TAG = "ModuleCallbackCanbusPro";
+
     private static final ModuleCallbackCanbusProxy INSTANCE = new ModuleCallbackCanbusProxy();
     private CallbackCanbusBase mCallback;
 
@@ -12,84 +16,80 @@ public class ModuleCallbackCanbusProxy extends IModuleCallback.Stub {
     }
 
     public void setCallbackCanbus(CallbackCanbusBase callback) {
-        if (this.mCallback != callback) {
-            if (this.mCallback != null) {
-                this.mCallback.out();
+        if (mCallback != callback) {
+            if (mCallback != null) {
+                mCallback.out();
                 //DoorHelper.clearDoorUpdateCode();
             }
-            this.mCallback = callback;
-            if (this.mCallback != null) {
-                this.mCallback.in();
+            mCallback = callback;
+            if (mCallback != null) {
+                mCallback.in();
             }
         }
     }
 
     public CallbackCanbusBase getCallbackCanbus() {
-        return this.mCallback;
+        return mCallback;
     }
 
     private ModuleCallbackCanbusProxy() {
     }
 
-    private boolean intsOk(int[] ints, int min) {
-        return ints != null && ints.length >= min;
-    }
-
-    @Override // com.syu.ipc.IModuleCallback
+    @Override
     public void update(int updateCode, int[] ints, float[] flts, String[] strs) throws RemoteException {
-        if (updateCode >= 0) {
-            if (updateCode < 1000) {
-                IModuleCallback callback = this.mCallback;
-                if (callback != null) {
-                    callback.update(updateCode, ints, flts, strs);
-                    return;
-                }
+        Log.d(TAG, "update: called! updateCode: " + updateCode);
+        if (updateCode < 0) return;
+
+        if (updateCode < 1000) {
+            Log.d(TAG, "update: Using mCallback!");
+            if (mCallback != null) {
+                mCallback.update(updateCode, ints, flts, strs);
                 return;
             }
-            switch (updateCode) {
-                case 1000:
-                    if (intsOk(ints, 1)) {
-                        HandlerCanbus.canbusId(updateCode, ints[0]);
-                        return;
-                    }
-                    return;
-                case FinalCanbus.U_AIR_WINDOW_ENABLE:
-                    if (intsOk(ints, 1)) {
-                        //AirHelper.airWindowEnable(ints[0]);
-                        return;
-                    }
-                    return;
-                case FinalCanbus.U_DOOR_WINDOW_ENABLE:
-                    if (intsOk(ints, 1)) {
-                        //DoorHelper.doorWindowEnable(ints[0]);
-                        return;
-                    }
-                    return;
-                case FinalCanbus.U_DRIVER_ON_RIGHT:
-                    HandlerCanbus.update(updateCode, ints);
-                    return;
-                case FinalCanbus.U_SHOW_AIR_WINDOW:
-                    try {
-                        /*Intent intent = new Intent("com.syu.canbus.enter.air");
-                        intent.setPackage(TheApp.getInstance().getPackageName());
-                        TheApp.getInstance().sendBroadcast(intent);*/
-                        return;
-                    } catch (Exception e) {
-                        return;
-                    }
-                case FinalCanbus.U_CAR_BT_ON:
-                    HandlerCanbus.updateCarBt(ints[0]);
-                    return;
-                case FinalCanbus.U_ORI_CARBACK:
-                    IModuleCallback callback2 = this.mCallback;
-                    if (callback2 != null) {
-                        callback2.update(updateCode, ints, flts, strs);
-                        return;
-                    }
-                    return;
-                default:
-                    return;
-            }
+            return;
+        }
+
+        switch (updateCode) {
+            case FinalCanbus.U_CANBUS_ID:
+                if (ints != null && ints.length > 0) {
+                    HandlerCanbus.canBusId(updateCode, ints[0]);
+                }
+                break;
+            case FinalCanbus.U_AIR_WINDOW_ENABLE:
+                if (ints != null && ints.length > 0) {
+                    Log.d(TAG, "update: airWindowEnable(" + ints[0] + ")");
+                    //AirHelper.airWindowEnable(ints[0]);
+                }
+                break;
+            case FinalCanbus.U_DOOR_WINDOW_ENABLE:
+                if (ints != null && ints.length > 0) {
+                    Log.d(TAG, "update: doorWindowEnable(" + ints[0] + ")");
+                    //DoorHelper.doorWindowEnable(ints[0]);
+                }
+                break;
+            case FinalCanbus.U_DRIVER_ON_RIGHT:
+                HandlerCanbus.update(updateCode, ints);
+                break;
+            case FinalCanbus.U_SHOW_AIR_WINDOW:
+                try {
+                    Log.d(TAG, "update: com.syu.canbus.enter.air broadcast");
+                    /*Intent intent = new Intent("com.syu.canbus.enter.air");
+                    intent.setPackage(TheApp.getInstance().getPackageName());
+                    TheApp.getInstance().sendBroadcast(intent);*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case FinalCanbus.U_CAR_BT_ON:
+                Log.d(TAG, "update: U_CAR_BT_ON");
+                HandlerCanbus.updateCarBt(ints[0]);
+                break;
+            case FinalCanbus.U_ORI_CARBACK:
+                Log.d(TAG, "update: Using mCallback!");
+                if (mCallback != null) {
+                    mCallback.update(updateCode, ints, flts, strs);
+                }
+                break;
         }
     }
 }

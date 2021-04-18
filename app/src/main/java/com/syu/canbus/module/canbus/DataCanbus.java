@@ -13,7 +13,7 @@ public class DataCanbus {
     public static int sCanbusId;
 
     static {
-        for (int i = 0; i < 1200; i++) {
+        for (int i = 0; i < FinalCanbus.U_CNT_MAX; i++) {
             NOTIFY_EVENTS[i] = new UiNotifyEvent(i);
         }
         DATA[1001] = 1;

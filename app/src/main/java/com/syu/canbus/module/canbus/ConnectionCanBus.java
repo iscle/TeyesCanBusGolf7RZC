@@ -18,7 +18,7 @@ public class ConnectionCanBus implements ConnectionObserver {
         try {
             DataCanbus.PROXY.setRemoteModule(toolkit.getRemoteModule(FinalMainServer.MODULE_CODE_CANBUS));
             ModuleCallbackCanbusProxy callback = ModuleCallbackCanbusProxy.getInstance();
-            DataCanbus.PROXY.register(callback, 1000, 1);
+            DataCanbus.PROXY.register(callback, FinalCanbus.U_CANBUS_ID, 1);
             DataCanbus.PROXY.register(callback, FinalCanbus.U_AIR_WINDOW_ENABLE, 1);
             DataCanbus.PROXY.register(callback, FinalCanbus.U_DOOR_WINDOW_ENABLE, 1);
             DataCanbus.PROXY.register(callback, FinalCanbus.U_CAR_BT_ON, 1);

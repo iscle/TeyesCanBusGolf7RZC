@@ -74,9 +74,9 @@ public interface IRemoteModule extends IInterface {
                 case TRANSACTION_getDescriptor:
                     reply.writeString(DESCRIPTOR);
                     return true;
-                default:
-                    return super.onTransact(code, data, reply, flags);
             }
+
+            return super.onTransact(code, data, reply, flags);
         }
 
         private static class Proxy implements IRemoteModule {
