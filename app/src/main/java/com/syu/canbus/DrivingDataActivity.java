@@ -1,20 +1,31 @@
 package com.syu.canbus;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.syu.canbus.databinding.FragmentDrivingDataBinding;
 import com.syu.canbus.module.IUiNotify;
 import com.syu.canbus.module.canbus.DataCanbus;
 
 public class DrivingDataActivity extends BaseActivity {
     private static final String TAG = "DrivingDataActivity";
 
+    private FragmentDrivingDataBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = FragmentDrivingDataBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
     @Override
@@ -27,23 +38,26 @@ public class DrivingDataActivity extends BaseActivity {
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_UNIT_CONSUMPTION].addNotify(mNotifyCanbus, 1);
 
         // Since start
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPION_SINCE_START].addNotify(mNotifyCanbus, 1);
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_SINCE_START].addNotify(mNotifyCanbus, 1);
+        //DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPION_SINCE_START].addNotify(mNotifyCanbus, 1);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPION_SINCE_START_NEW].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_RANGE_LEFT_SINCE_START].addNotify(mNotifyCanbus, 1);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_SINCE_START].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_TIME_SINCE_START].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_SPEED_SINCE_START].addNotify(mNotifyCanbus, 1);
 
         // Since refuelling
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM].addNotify(mNotifyCanbus, 1);
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_LONG_TERM].addNotify(mNotifyCanbus, 1);
+        //DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM].addNotify(mNotifyCanbus, 1);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM_NEW].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_RANGE_LEFT_LONG_TERM].addNotify(mNotifyCanbus, 1);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_LONG_TERM].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_TIME_LONG_TERM].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_SPEED_LONG_TERM].addNotify(mNotifyCanbus, 1);
 
         // Long-term
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING].addNotify(mNotifyCanbus, 1);
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING].addNotify(mNotifyCanbus, 1);
+        //DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING].addNotify(mNotifyCanbus, 1);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING_NEW].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_RANGE_LEFT_SINCE_REFUELLING].addNotify(mNotifyCanbus, 1);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_TIME_SINCE_REFUELLING].addNotify(mNotifyCanbus, 1);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_SPEED_SINCE_REFUELLING].addNotify(mNotifyCanbus, 1);
 
@@ -60,143 +74,70 @@ public class DrivingDataActivity extends BaseActivity {
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_UNIT_CONSUMPTION].removeNotify(mNotifyCanbus);
 
         // Since start
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPION_SINCE_START].removeNotify(mNotifyCanbus);
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_SINCE_START].removeNotify(mNotifyCanbus);
+        //DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPION_SINCE_START].removeNotify(mNotifyCanbus);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPION_SINCE_START_NEW].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_RANGE_LEFT_SINCE_START].removeNotify(mNotifyCanbus);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_SINCE_START].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_TIME_SINCE_START].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_SPEED_SINCE_START].removeNotify(mNotifyCanbus);
 
         // Since refuelling
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM].removeNotify(mNotifyCanbus);
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_LONG_TERM].removeNotify(mNotifyCanbus);
+        //DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM].removeNotify(mNotifyCanbus);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM_NEW].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_RANGE_LEFT_LONG_TERM].removeNotify(mNotifyCanbus);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_LONG_TERM].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_TIME_LONG_TERM].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_SPEED_LONG_TERM].removeNotify(mNotifyCanbus);
 
         // Long-term
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING].removeNotify(mNotifyCanbus);
-        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING].removeNotify(mNotifyCanbus);
+        //DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING].removeNotify(mNotifyCanbus);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING_NEW].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_RANGE_LEFT_SINCE_REFUELLING].removeNotify(mNotifyCanbus);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_DRIVING_TIME_SINCE_REFUELLING].removeNotify(mNotifyCanbus);
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AVG_SPEED_SINCE_REFUELLING].removeNotify(mNotifyCanbus);
     }
 
-    private void updateAvgConsumption() {
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPION_SINCE_START];
-            int value = data & 0xFFFF;
-            int unit = (data >> 29) & 0x07;
-            if (value != 0xFFFF && unit < 4) {
-                Log.d(TAG, "mUpdaterAverageOil: " + value + " " + Golf7Data.mOilUnitXp1[unit]);
-            } else if (unit < 4) {
-                Log.d(TAG, "mUpdaterAverageOil: " + "--.- " + Golf7Data.mOilUnitXp1[unit]);
-            }
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM];
-            int value = data & 0xFFFF;
-            int unit = (data >> 29) & 0x07;
-            if (value != 0xFFFF && unit < 4) {
-                Log.d(TAG, "mUpdaterAverageOil: " + value + " " + Golf7Data.mOilUnitXp1[unit]);
-            } else if (unit < 4) {
-                Log.d(TAG, "mUpdaterAverageOil: " + "--.- " + Golf7Data.mOilUnitXp1[unit]);
-            }
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING];
-            int value = data & 0xFFFF;
-            int unit = (data >> 29) & 0x07;
-            if (value != 0xFFFF && unit < 4) {
-                Log.d(TAG, "mUpdaterAverageOil: " + value + " " + Golf7Data.mOilUnitXp1[unit]);
-            } else if (unit < 4) {
-                Log.d(TAG, "mUpdaterAverageOil: " + "--.- " + Golf7Data.mOilUnitXp1[unit]);
-            }
+    private void updateAvgConsumption(int data) {
+        int value = data >>> 8;
+        int unit = data & 0xFF;
+        Log.d(TAG, "mUpdaterAverageOilNew: " + (value / 10) + "."  + (value % 10) + " " + Golf7Data.mOilUnitXp1[unit]);
+        if (value != 0) {
+            binding.consumption.setText((value / 10) + "." + (value % 10) + " " + Golf7Data.mOilUnitXp1[unit]);
+        } else {
+            binding.consumption.setText("--.- " + Golf7Data.mOilUnitXp1[unit]);
         }
     }
 
-    private void updateDrivingDistance() {
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_DRIVING_DISTANCE_SINCE_START];
-            int value = data & 0xFFFF;
-            int unit = (data >> 29) & 0x01;
-            Log.d(TAG, "updateDrivingDistance: " + value + " " + Golf7Data.mDistanceUnitXp[unit]);
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_DRIVING_DISTANCE_LONG_TERM];
-            int value = data & 0xFFFF;
-            int unit = (data >> 29) & 0x01;
-            Log.d(TAG, "updateDrivingDistance: " + value + " " + Golf7Data.mDistanceUnitXp[unit]);
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING];
-            int value = data & 0xFFFF;
-            int unit = (data >> 29) & 0x01;
-            Log.d(TAG, "updateDrivingDistance: " + value + " " + Golf7Data.mDistanceUnitXp[unit]);
-        }
+    private void updateDrivingDistance(int data) {
+        int value = data & 0xFFFF;
+        int unit = (data >> 29) & 0x01;
+        Log.d(TAG, "updateDrivingDistance: " + value + " " + Golf7Data.mDistanceUnitXp[unit]);
+        binding.distance.setText(value + " " + Golf7Data.mDistanceUnitXp[unit]);
     }
 
-    private void updateRangeLeft() {
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_RANGE_LEFT_SINCE_START];
-            int value = data & 0x1FFFFFFF;
-            int unit = (data >> 29) & 0x01;
-            Log.d(TAG, "updateRangeLeft: " + value + " " + Golf7Data.mDistanceUnitXp[unit]);
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_RANGE_LEFT_LONG_TERM];
-            int value = data & 0x1FFFFFFF;
-            int unit = (data >> 29) & 0x01;
-            Log.d(TAG, "updateRangeLeft: " + value + " " + Golf7Data.mDistanceUnitXp[unit]);
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_RANGE_LEFT_SINCE_REFUELLING];
-            int value = data & 0x1FFFFFFF;
-            int unit = (data >> 29) & 0x01;
-            Log.d(TAG, "updateRangeLeft: " + value + " " + Golf7Data.mDistanceUnitXp[unit]);
-        }
+    private void updateRangeLeft(int data) {
+        int value = data & 0x1FFFFFFF;
+        int unit = (data >> 29) & 0x01;
+        Log.d(TAG, "updateRangeLeft: " + value + " " + Golf7Data.mDistanceUnitXp[unit]);
+        binding.range.setText(value + " " + Golf7Data.mDistanceUnitXp[unit]);
     }
 
-    private void updateDrivingTime() {
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_DRIVING_TIME_SINCE_START];
-            int value = data & 0xFFFFFF;
-            Log.d(TAG, "updateDrivingTime: " + (value / 60) + ":" + (value % 60) + " h");
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_DRIVING_TIME_LONG_TERM];
-            int value = data & 0xFFFFFF;
-            Log.d(TAG, "updateDrivingTime: " + (value / 60) + ":" + (value % 60) + " h");
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_DRIVING_TIME_SINCE_REFUELLING];
-            int value = data & 0xFFFFFF;
-            Log.d(TAG, "updateDrivingTime: " + (value / 60) + ":" + (value % 60) + " h");
-        }
+    private void updateDrivingTime(int data) {
+        int value = data & 0xFFFFFF;
+        Log.d(TAG, "updateDrivingTime: " + (value / 60) + ":" + (value % 60) + " h");
+        binding.time.setText(String.format("%02d:%02d h", value / 60, value % 60));
     }
 
-    private void updateAvgSpeed() {
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_AVG_SPEED_SINCE_START];
-            int unit = (data >> 29) & 0x01;
-            int value = data & 0xFFFF;
-            Log.d(TAG, "updateAvgSpeed: " + value + " " + Golf7Data.mSpeedUnitXp[unit]);
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_AVG_SPEED_LONG_TERM];
-            int unit = (data >> 29) & 0x01;
-            int value = data & 0xFFFF;
-            Log.d(TAG, "updateAvgSpeed: " + value + " " + Golf7Data.mSpeedUnitXp[unit]);
-        }
-        {
-            int data = DataCanbus.DATA[ConstGolf.U_AVG_SPEED_SINCE_REFUELLING];
-            int unit = (data >> 29) & 0x01;
-            int value = data & 0xFFFF;
-            Log.d(TAG, "updateAvgSpeed: " + value + " " + Golf7Data.mSpeedUnitXp[unit]);
-        }
+    private void updateAvgSpeed(int data) {
+        int unit = (data >> 29) & 0x01;
+        int value = data & 0xFFFF;
+        Log.d(TAG, "updateAvgSpeed: " + value + " " + Golf7Data.mSpeedUnitXp[unit]);
+        binding.speed.setText(value + " " + Golf7Data.mSpeedUnitXp[unit]);
     }
 
-    private void updateCarAnimation() {
-        Log.d(TAG, "updateCarAnimation: data: " + DataCanbus.DATA[ConstGolf.U_SET_REMAINING_OIL]);
+    private void updateCarAnimation(int data) {
+        Log.d(TAG, "updateCarAnimation: data: " + data);
     }
 
     private final IUiNotify mNotifyCanbus = new IUiNotify() {
@@ -205,35 +146,70 @@ public class DrivingDataActivity extends BaseActivity {
             Utils.dumpOnNotify(TAG, updateCode, ints, flts, strs);
             switch (updateCode) {
                 case ConstGolf.U_AVG_CONSUMPION_SINCE_START:
-                case ConstGolf.U_AVG_CONSUMPTION_LONG_TERM:
-                case ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING:
-                case ConstGolf.U_UNIT_CONSUMPTION:
-                    updateAvgConsumption();
+                    //updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPION_SINCE_START]);
                     break;
-                case ConstGolf.U_DRIVING_DISTANCE_SINCE_START:
-                case ConstGolf.U_DRIVING_DISTANCE_LONG_TERM:
-                case ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING:
-                case ConstGolf.U_SET_UNIT_DISTANCE:
-                    updateDrivingDistance();
+                case ConstGolf.U_AVG_CONSUMPION_SINCE_START_NEW:
+                    updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPION_SINCE_START_NEW]);
+                    break;
+                case ConstGolf.U_AVG_CONSUMPTION_LONG_TERM:
+                    //updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM]);
+                    break;
+                case ConstGolf.U_AVG_CONSUMPTION_LONG_TERM_NEW:
+                    //updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPTION_LONG_TERM_NEW]);
+                    break;
+                case ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING:
+                    //updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING]);
+                    break;
+                case ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING_NEW:
+                    //updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING_NEW]);
+                    break;
+                case ConstGolf.U_UNIT_CONSUMPTION:
+                    //updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_UNIT_CONSUMPTION]);
                     break;
                 case ConstGolf.U_RANGE_LEFT_SINCE_START:
+                    updateRangeLeft(DataCanbus.DATA[ConstGolf.U_RANGE_LEFT_SINCE_START]);
+                    break;
                 case ConstGolf.U_RANGE_LEFT_LONG_TERM:
+                    //updateRangeLeft(DataCanbus.DATA[ConstGolf.U_RANGE_LEFT_LONG_TERM]);
+                    break;
                 case ConstGolf.U_RANGE_LEFT_SINCE_REFUELLING:
-                    updateRangeLeft();
+                    //updateRangeLeft(DataCanbus.DATA[ConstGolf.U_RANGE_LEFT_SINCE_REFUELLING]);
+                    break;
+                case ConstGolf.U_SET_UNIT_DISTANCE:
+                    //updateRangeLeft(DataCanbus.DATA[ConstGolf.U_SET_UNIT_DISTANCE]);
+                    break;
+                case ConstGolf.U_DRIVING_DISTANCE_SINCE_START:
+                    updateDrivingDistance(DataCanbus.DATA[ConstGolf.U_DRIVING_DISTANCE_SINCE_START]);
+                    break;
+                case ConstGolf.U_DRIVING_DISTANCE_LONG_TERM:
+                    //updateDrivingDistance(DataCanbus.DATA[ConstGolf.U_DRIVING_DISTANCE_LONG_TERM]);
+                    break;
+                case ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING:
+                    //updateDrivingDistance(DataCanbus.DATA[ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING]);
                     break;
                 case ConstGolf.U_DRIVING_TIME_SINCE_START:
+                    updateDrivingTime(DataCanbus.DATA[ConstGolf.U_DRIVING_TIME_SINCE_START]);
+                    break;
                 case ConstGolf.U_DRIVING_TIME_LONG_TERM:
+                    //updateDrivingTime(DataCanbus.DATA[ConstGolf.U_DRIVING_TIME_LONG_TERM]);
+                    break;
                 case ConstGolf.U_DRIVING_TIME_SINCE_REFUELLING:
-                    updateDrivingTime();
+                    //updateDrivingTime(DataCanbus.DATA[ConstGolf.U_DRIVING_TIME_SINCE_REFUELLING]);
                     break;
                 case ConstGolf.U_AVG_SPEED_SINCE_START:
+                    updateAvgSpeed(DataCanbus.DATA[ConstGolf.U_AVG_SPEED_SINCE_START]);
+                    break;
                 case ConstGolf.U_AVG_SPEED_LONG_TERM:
+                    //updateAvgSpeed(DataCanbus.DATA[ConstGolf.U_AVG_SPEED_LONG_TERM]);
+                    break;
                 case ConstGolf.U_AVG_SPEED_SINCE_REFUELLING:
+                    //updateAvgSpeed(DataCanbus.DATA[ConstGolf.U_AVG_SPEED_SINCE_REFUELLING]);
+                    break;
                 case ConstGolf.U_UNIT_SPEED:
-                    updateAvgSpeed();
+                    //updateAvgSpeed(DataCanbus.DATA[ConstGolf.U_UNIT_SPEED]);
                     break;
                 case ConstGolf.U_SET_REMAINING_OIL:
-                    updateCarAnimation();
+                    updateCarAnimation(DataCanbus.DATA[ConstGolf.U_SET_REMAINING_OIL]);
                     break;
             }
         }

@@ -23,7 +23,7 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
     @Override
     public void in() {
         IModuleCallback callback = ModuleCallbackCanbusProxy.getInstance();
-        for (int i = 0; i < 396; i++) {
+        for (int i = 0; i < 500; i++) {
             DataCanbus.PROXY.register(callback, i, 1);
         }
         this.carId = (DataCanbus.DATA[1000] >> 16) & 0xFFFF;
@@ -96,7 +96,7 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
                     }8*/
                     return;
                 case 104:
-                    if (updateCode >= 0 && updateCode < 396) {
+                    if (updateCode >= 0 && updateCode < 500) {
                         HandlerCanbus.update(updateCode, ints);
                     }
                     int value = DataCanbus.DATA[104];
@@ -114,7 +114,7 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
                     convDrivingMode(updateCode, ints);
                     return;
                 default:
-                    if (updateCode >= 0 && updateCode < 396) {
+                    if (updateCode >= 0 && updateCode < 500) {
                         HandlerCanbus.update(updateCode, ints);
                         return;
                     }

@@ -37,11 +37,11 @@ public class ModuleCallbackCanbusProxy extends IModuleCallback.Stub {
 
     @Override
     public void update(int updateCode, int[] ints, float[] flts, String[] strs) throws RemoteException {
-        Log.d(TAG, "update: called! updateCode: " + updateCode);
+        //Log.d(TAG, "update: called! updateCode: " + updateCode);
         if (updateCode < 0) return;
 
         if (updateCode < 1000) {
-            Log.d(TAG, "update: Using mCallback!");
+            //Log.d(TAG, "update: Using mCallback!");
             if (mCallback != null) {
                 mCallback.update(updateCode, ints, flts, strs);
                 return;
@@ -85,7 +85,7 @@ public class ModuleCallbackCanbusProxy extends IModuleCallback.Stub {
                 HandlerCanbus.updateCarBt(ints[0]);
                 break;
             case FinalCanbus.U_ORI_CARBACK:
-                Log.d(TAG, "update: Using mCallback!");
+                //Log.d(TAG, "update: Using mCallback!");
                 if (mCallback != null) {
                     mCallback.update(updateCode, ints, flts, strs);
                 }

@@ -155,14 +155,19 @@ public class ConstGolf {
     public static final int S_UNITSETTING = 202;
 
     public static final int U_AVG_CONSUMPION_SINCE_START = 0;
+    public static final int U_AVG_CONSUMPION_SINCE_START_NEW = 403;
     public static final int U_AVG_CONSUMPTION_SINCE_REFUELLING = 10;
-    public static final int U_DRIVING_DISTANCE_SINCE_REFUELLING = 11;
-    public static final int U_RANGE_LEFT_SINCE_REFUELLING = 12;
+    public static final int U_AVG_CONSUMPTION_SINCE_REFUELLING_NEW = 404;
+    public static final int U_RANGE_LEFT_SINCE_REFUELLING = 11;
+    public static final int U_DRIVING_DISTANCE_SINCE_REFUELLING = 12;
+    public static final int U_DRIVING_DISTANCE_SINCE_REFUELLING_NEW = 401;
     public static final int U_DRIVING_TIME_SINCE_REFUELLING = 13;
     public static final int U_AVG_SPEED_SINCE_REFUELLING = 14;
+    public static final int U_AVG_SPEED_SINCE_REFUELLING_NEW = 407;
     public static final int U_15 = 15;
-    public static final int U_DRIVING_DISTANCE_SINCE_START = 1;
-    public static final int U_RANGE_LEFT_SINCE_START = 2;
+    public static final int U_RANGE_LEFT_SINCE_START = 1;
+    public static final int U_DRIVING_DISTANCE_SINCE_START = 2;
+    public static final int U_DRIVING_DISTANCE_SINCE_START_NEW = 400;
     public static final int U_2_ELECTRIC_BY_LONG = 289;
     public static final int U_2_ELECTRIC_BY_REFUEL = 291;
     public static final int U_2_ELECTRIC_BY_START = 277;
@@ -176,6 +181,7 @@ public class ConstGolf {
     public static final int U_3_ELECTRIC_ELECTRIC_OIL_RATE = 297;
     public static final int U_3_ELECTRIC_ENERGY_FLOW = 294;
     public static final int U_AVG_SPEED_SINCE_START = 4;
+    public static final int U_AVG_SPEED_SINCE_START_NEW = 406;
     public static final int U_4_HYBRID_BATTERY_LEVEL = 303;
     public static final int U_4_HYBRID_DRIVE_MODE_BATTERY_CHARGE = 301;
     public static final int U_4_HYBRID_DRIVE_MODE_BATTERY_MAINTAIN = 300;
@@ -183,10 +189,13 @@ public class ConstGolf {
     public static final int U_4_HYBRID_DRIVE_MODE_GTE = 302;
     public static final int U_4_HYBRID_DRIVE_MODE_HYBRID = 299;
     public static final int U_AVG_CONSUMPTION_LONG_TERM = 5;
-    public static final int U_DRIVING_DISTANCE_LONG_TERM = 6;
-    public static final int U_RANGE_LEFT_LONG_TERM = 7;
+    public static final int U_AVG_CONSUMPTION_LONG_TERM_NEW = 405;
+    public static final int U_RANGE_LEFT_LONG_TERM = 6;
+    public static final int U_DRIVING_DISTANCE_LONG_TERM = 7;
+    public static final int U_DRIVING_DISTANCE_LONG_TERM_NEW = 402;
     public static final int U_DRIVING_TIME_LONG_TERM = 8;
     public static final int U_AVG_SPEED_LONG_TERM = 9;
+    public static final int U_AVG_SPEED_LONG_TERM_NEW = 408;
     public static final int U_ACTIVATEAUTOMATICLLY = 19;
     public static final int U_ACTIVATEMATICLLY = 162;
     public static final int U_AIR = 105;

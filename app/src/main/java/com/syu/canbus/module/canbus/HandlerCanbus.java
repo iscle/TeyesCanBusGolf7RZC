@@ -65,23 +65,18 @@ public class HandlerCanbus {
     }
 
     public static CallbackCanbusBase getCallbackCanbusById(int id) {
+        DataCanbus.sCanbusId = id;
         int canbusId = id & 0xFFFF;
         int carId = (id >> 16) & 0xFFFF;
+        DataCanbus.carId = carId;
 
         Log.d(TAG, "getCallbackCanbusById: canbusId: " + canbusId + ", carId: " + carId);
 
-        DataCanbus.sCanbusId = id;
-        DataCanbus.carId = carId;
-        
         if (canbusId != 0 && carId != 0) {
             Log.d(TAG, "getCallbackCanbusById: returning Golf 7 callback");
             return new Callback_0160_RZC_XP1_DaZhong_GaoErFu7();
         }
 
-        /*
-        // Method dump skipped, instructions count: 7180
-        */
-        //throw new UnsupportedOperationException("Method not decompiled: com.syu.canbus.module.canbus.HandlerCanbus.getCallbackCanbusById(int):com.syu.canbus.module.canbus.CallbackCanbusBase");
         Log.d(TAG, "getCallbackCanbusById: id: " + id);
         return null;
     }
