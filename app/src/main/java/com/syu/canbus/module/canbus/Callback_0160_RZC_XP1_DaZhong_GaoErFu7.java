@@ -3,6 +3,7 @@ package com.syu.canbus.module.canbus;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.syu.canbus.ConstGolf;
 import com.syu.canbus.ui.AirHelper;
 import com.syu.canbus.ui.DoorHelper;
 import com.syu.ipc.IModuleCallback;
@@ -23,108 +24,106 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
     @Override
     public void in() {
         IModuleCallback callback = ModuleCallbackCanbusProxy.getInstance();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < ConstGolf.U_CNT_MAX; i++) {
             DataCanbus.PROXY.register(callback, i, 1);
         }
-        this.carId = (DataCanbus.DATA[1000] >> 16) & 0xFFFF;
+        this.carId = (DataCanbus.DATA[FinalCanbus.U_CANBUS_ID] >> 16) & 0xFFFF;
         Log.d(TAG, "in: carId: " + this.carId);
-        //DoorHelper.sUcDoorEngine = 109;
-        //DoorHelper.sUcDoorFl = 110;
-        //DoorHelper.sUcDoorFr = 111;
-        //DoorHelper.sUcDoorRl = 112;
-        //DoorHelper.sUcDoorRr = 113;
-        //DoorHelper.sUcDoorBack = 114;
+        //DoorHelper.sUcDoorEngine = U_DOOR_ENGINE;
+        //DoorHelper.sUcDoorFl = ConstGolf.U_DOOR_FL;
+        //DoorHelper.sUcDoorFr = ConstGolf.U_DOOR_FR;
+        //DoorHelper.sUcDoorRl = ConstGolf.U_DOOR_RL;
+        //DoorHelper.sUcDoorRr = ConstGolf.U_DOOR_RR;
+        //DoorHelper.sUcDoorBack = ConstGolf.U_DOOR_BACK;
         //AirHelper.getInstance().buildUi(new Air_0160_RZC_DaZhong_All(TheApp.getInstance()));
-        for (int i7 = 87; i7 < 108; i7++) {
-            DataCanbus.NOTIFY_EVENTS[i7].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        for (int i = ConstGolf.U_AIR_BEGIN; i < ConstGolf.U_AIR_END; i++) {
+            DataCanbus.NOTIFY_EVENTS[i].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
         }
-        DataCanbus.NOTIFY_EVENTS[123].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[151].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[207].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[204].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[206].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[205].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[190].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[191].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[192].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[220].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[221].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[366].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[226].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        DataCanbus.NOTIFY_EVENTS[158].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
-        for (int i8 = 150; i8 <= 157; i8++) {
-            DataCanbus.NOTIFY_EVENTS[i8].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_REAR].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_REAR_LOCK].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_REAR_AUTO].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_REAR_BLOW_FOOT].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_REAR_BLOW_BODY].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_REAR_WIND_LEVEL].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_CLEAR_AIR].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_SEAT_BLOW_RIGHT].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_SEAT_BLOW_LEFT].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_REAR_SEATHEAT_LEFT].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_REAR_SEATHEAT_RIGHT].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_NEWADD_AIR_STEER_SEAT_ON].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_CLEAR_AIR_PROGRESS].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_SHOW].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
+        for (int i = ConstGolf.U_AIR_REAR2; i <= ConstGolf.U_AIR_CYCLE2; i++) {
+            DataCanbus.NOTIFY_EVENTS[i].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
         }
 
         DoorHelper.getInstance().buildUi();
-        for (int i9 = 109; i9 < 115; i9++) {
-            DataCanbus.NOTIFY_EVENTS[i9].addNotify(DoorHelper.getInstance(), 0);
+        for (int i = ConstGolf.U_DOOR_BEGIN; i < ConstGolf.U_DOOR_END; i++) {
+            DataCanbus.NOTIFY_EVENTS[i].addNotify(DoorHelper.getInstance(), 0);
         }
     }
 
-    @Override // com.syu.module.canbus.CallbackCanbusBase
+    @Override
     public void out() {
-        for (int i = 109; i < 115; i++) {
+        for (int i = ConstGolf.U_DOOR_BEGIN; i < ConstGolf.U_DOOR_END; i++) {
             DataCanbus.NOTIFY_EVENTS[i].removeNotify(DoorHelper.getInstance());
         }
-        for (int i2 = 87; i2 < 108; i2++) {
-            DataCanbus.NOTIFY_EVENTS[i2].removeNotify(AirHelper.SHOW_AND_REFRESH);
+        for (int i = ConstGolf.U_AIR_BEGIN; i < ConstGolf.U_AIR_END; i++) {
+            DataCanbus.NOTIFY_EVENTS[i].removeNotify(AirHelper.SHOW_AND_REFRESH);
         }
-        DataCanbus.NOTIFY_EVENTS[190].removeNotify(AirHelper.SHOW_AND_REFRESH);
+        DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_CLEAR_AIR].removeNotify(AirHelper.SHOW_AND_REFRESH);
         AirHelper.getInstance().destroyUi();
         DoorHelper.getInstance().destroyUi();
     }
 
-    @Override // com.syu.ipc.IModuleCallback
+    @Override
     public void update(int updateCode, int[] ints, float[] flts, String[] strs) throws RemoteException {
-        if (updateCode >= 0) {
-            switch (updateCode) {
-                case 74:
-                    warningVehicle(updateCode, ints);
-                    return;
-                case 75:
-                    warningStartStop(updateCode, ints);
-                    return;
-                case 76:
-                    convConsumer(updateCode, ints);
-                    return;
-                case 82:
-                    /*if (strs != null && strs.length >= 1 && !ToolkitMisc.strEqual(ConstGolf.mCarId, strs[0])) {
-                        ConstGolf.mCarId = strs[0];
-                        DataCanbus.NOTIFY_EVENTS[updateCode].onNotify();
-                        return;
-                    }8*/
-                    return;
-                case 104:
-                    if (updateCode >= 0 && updateCode < 500) {
-                        HandlerCanbus.update(updateCode, ints);
-                    }
-                    int value = DataCanbus.DATA[104];
-                    /*if (value == 1 && !Golf7AirActi.mIsFront) {
-                        AirHelper.disableAirWindowLocal(true);
-                        JumpPage.startActivity("com.syu.canbus", "com.syu.carinfo.golf7.Golf7AirActi");
-                        return;
-                    } else if (value == 0 && Golf7AirActi.mIsFront && Golf7AirActi.mInstance != null) {
-                        Golf7AirActi.mInstance.finish();
-                        return;
-                    } else */{
-                        return;
-                    }
-                case 138:
-                    convDrivingMode(updateCode, ints);
-                    return;
-                default:
-                    if (updateCode >= 0 && updateCode < 500) {
-                        HandlerCanbus.update(updateCode, ints);
-                        return;
-                    }
-                    return;
-            }
+        if  (updateCode < 0 || updateCode > ConstGolf.U_CNT_MAX) {
+            Log.w(TAG, "update: Invalid update code (" + updateCode + ")");
+            return;
+        }
+
+        switch (updateCode) {
+            case ConstGolf.U_WARNNING_VEHICLE:
+                warningVehicle(updateCode, ints);
+                break;
+            case ConstGolf.U_WARNNING_START_STOP:
+                warningStartStop(updateCode, ints);
+                break;
+            case ConstGolf.U_WARNNING_CONV_CONSUMER:
+                convConsumer(updateCode, ints);
+                break;
+            case ConstGolf.U_IDCARNUM:
+                /*if (strs != null && strs.length >= 1 && !ToolkitMisc.strEqual(ConstGolf.mCarId, strs[0])) {
+                    ConstGolf.mCarId = strs[0];
+                    DataCanbus.NOTIFY_EVENTS[updateCode].onNotify();
+                    break;
+                }*/
+                break;
+            case ConstGolf.U_AIR_JUMPCON:
+                HandlerCanbus.update(updateCode, ints);
+                int value = DataCanbus.DATA[ConstGolf.U_AIR_JUMPCON];
+                /*if (value == 1 && !Golf7AirActi.mIsFront) {
+                    AirHelper.disableAirWindowLocal(true);
+                    JumpPage.startActivity("com.syu.canbus", "com.syu.carinfo.golf7.Golf7AirActi");
+                    break;
+                } else if (value == 0 && Golf7AirActi.mIsFront && Golf7AirActi.mInstance != null) {
+                    Golf7AirActi.mInstance.finish();
+                    break;
+                } else */{
+                    break;
+                }
+            case ConstGolf.U_JUMP_CARINFO:
+                convDrivingMode(updateCode, ints);
+                break;
+            default:
+                HandlerCanbus.update(updateCode, ints);
+                break;
         }
     }
 
     private void convDrivingMode(int updateCode, int[] ints) {
-        if (updateCode == 138) {
+        if (updateCode == ConstGolf.U_JUMP_CARINFO) {
             HandlerCanbus.update(updateCode, ints);
             if (ints[0] != 0) {
                 /*if (!Golf7FunctionalDrivingInfo1Acti.mIsFront) {
@@ -137,23 +136,26 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
     }
 
     private void convConsumer(int updateCode, int[] ints) {
-        if (ints != null && ints.length >= 2 && ints[0] >= 0 && ints[0] < 7) {
-            //ConstGolf.mConvConsumer[ints[0]] = ints;
-            DataCanbus.NOTIFY_EVENTS[updateCode].onNotify(ints, null, null);
+        if (ints == null || ints.length < 2 || ints[0] < 0 || ints[0] >= ConstGolf.CONV_CONSUMER_MAX) {
+            return;
         }
+        //ConstGolf.mConvConsumer[ints[0]] = ints;
+        DataCanbus.NOTIFY_EVENTS[updateCode].onNotify(ints, null, null);
     }
 
     private void warningVehicle(int updateCode, int[] ints) {
-        if (ints != null && ints.length >= 2 && ints[0] >= 0 && ints[0] < 16) {
-            //ConstGolf.mVehicleWarning[ints[0]] = ints;
-            DataCanbus.NOTIFY_EVENTS[updateCode].onNotify(ints, null, null);
+        if (ints == null || ints.length < 2 || ints[0] < 0 || ints[0] >= ConstGolf.VEHICLE_WARNING_MAX) {
+            return;
         }
+        //ConstGolf.mVehicleWarning[ints[0]] = ints;
+        DataCanbus.NOTIFY_EVENTS[updateCode].onNotify(ints, null, null);
     }
 
     private void warningStartStop(int updateCode, int[] ints) {
-        if (ints != null && ints.length >= 2 && ints[0] >= 0 && ints[0] < 7) {
-            //ConstGolf.mSartStop[ints[0]] = ints;
-            DataCanbus.NOTIFY_EVENTS[updateCode].onNotify(ints, null, null);
+        if (ints == null || ints.length < 2 || ints[0] < 0 || ints[0] >= ConstGolf.START_STOP_MAX) {
+            return;
         }
+        //ConstGolf.mSartStop[ints[0]] = ints;
+        DataCanbus.NOTIFY_EVENTS[updateCode].onNotify(ints, null, null);
     }
 }

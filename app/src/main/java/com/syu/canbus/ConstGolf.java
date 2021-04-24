@@ -263,7 +263,7 @@ public class ConstGolf {
     public static final int U_CAR_KEY_ACTIVATED = 163;
     public static final int U_CHANGE_AIDS_OD = 257;
     public static final int U_CHANGE_BRIGHT_OD = 258;
-    public static final int U_CNT_MAX = 396;
+    public static final int U_CNT_MAX = 500;//396;
     public static final int U_CUR_SPEED = 125;
     public static final int U_DASHBOARD_SET = 264;
     public static final int U_DASHBOARD_SHOW = 265;
@@ -537,8 +537,8 @@ public class ConstGolf {
     public static int sOilUnit;
 
     public static boolean isRZCGolf() {
-        switch (DataCanbus.DATA[1000]) {
-            case 160:
+        switch (DataCanbus.DATA[FinalCanbus.U_CANBUS_ID]) {
+            case FinalCanbus.CAR_RZC_XP1_DaZhong_GaoErFu7 /*{ENCODED_INT: 160}*/:
             case FinalCanbus.CAR2_RZC_XP1_DaZhong_GaoErFu7_H /*{ENCODED_INT: 131232}*/:
             case FinalCanbus.CAR_RZC_XP1_MaiTeng /*{ENCODED_INT: 196768}*/:
             case FinalCanbus.CAR_RZC_TuGuan_L /*{ENCODED_INT: 262304}*/:

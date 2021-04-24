@@ -31,7 +31,7 @@ public class ConnectionCanBus implements ConnectionObserver {
     @Override
     public void onDisconnected() {
         DataCanbus.PROXY.setRemoteModule(null);
-        DataCanbus.DATA[1000] = 0;
+        DataCanbus.DATA[FinalCanbus.U_CANBUS_ID] = 0;
         ModuleCallbackCanbusProxy.getInstance().setCallbackCanbus(null);
     }
 
