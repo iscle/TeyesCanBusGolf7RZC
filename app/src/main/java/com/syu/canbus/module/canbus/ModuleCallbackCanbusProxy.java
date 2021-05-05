@@ -16,15 +16,14 @@ public class ModuleCallbackCanbusProxy extends IModuleCallback.Stub {
     }
 
     public void setCallbackCanbus(CallbackCanbusBase callback) {
-        if (mCallback != callback) {
-            if (mCallback != null) {
-                mCallback.out();
-                //DoorHelper.clearDoorUpdateCode();
-            }
-            mCallback = callback;
-            if (mCallback != null) {
-                mCallback.in();
-            }
+        if (mCallback == callback) return;
+        if (mCallback != null) {
+            mCallback.out();
+            //DoorHelper.clearDoorUpdateCode();
+        }
+        mCallback = callback;
+        if (mCallback != null) {
+            mCallback.in();
         }
     }
 

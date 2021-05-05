@@ -5,7 +5,14 @@ import android.util.Log;
 import com.syu.canbus.module.canbus.DataCanbus;
 import com.syu.canbus.module.canbus.FinalCanbus;
 
+import java.text.DecimalFormatSymbols;
+
 public class Utils {
+
+    public static char decimalSeparator() {
+        return DecimalFormatSymbols.getInstance().getDecimalSeparator();
+    }
+
     public static boolean isRZCGolf() {
         switch (DataCanbus.DATA[1000]) {
             case FinalCanbus.CAR_RZC_XP1_DaZhong_GaoErFu7 /*{ENCODED_INT: 160}*/:

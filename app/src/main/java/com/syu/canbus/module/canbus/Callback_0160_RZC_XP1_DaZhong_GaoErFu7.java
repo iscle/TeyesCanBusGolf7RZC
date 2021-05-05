@@ -21,20 +21,28 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
         }
     };
 
-    @Override
-    public void in() {
-        IModuleCallback callback = ModuleCallbackCanbusProxy.getInstance();
-        for (int i = 0; i < ConstGolf.U_CNT_MAX; i++) {
-            DataCanbus.PROXY.register(callback, i, 1);
-        }
-        this.carId = (DataCanbus.DATA[FinalCanbus.U_CANBUS_ID] >> 16) & 0xFFFF;
-        Log.d(TAG, "in: carId: " + this.carId);
+    private void addDoorNotify() {
         //DoorHelper.sUcDoorEngine = U_DOOR_ENGINE;
         //DoorHelper.sUcDoorFl = ConstGolf.U_DOOR_FL;
         //DoorHelper.sUcDoorFr = ConstGolf.U_DOOR_FR;
         //DoorHelper.sUcDoorRl = ConstGolf.U_DOOR_RL;
         //DoorHelper.sUcDoorRr = ConstGolf.U_DOOR_RR;
         //DoorHelper.sUcDoorBack = ConstGolf.U_DOOR_BACK;
+
+        DoorHelper.getInstance().buildUi();
+        for (int i = ConstGolf.U_DOOR_BEGIN; i < ConstGolf.U_DOOR_END; i++) {
+            DataCanbus.NOTIFY_EVENTS[i].addNotify(DoorHelper.getInstance(), 0);
+        }
+    }
+
+    private void removeDoorNotify() {
+        for (int i = ConstGolf.U_DOOR_BEGIN; i < ConstGolf.U_DOOR_END; i++) {
+            DataCanbus.NOTIFY_EVENTS[i].removeNotify(DoorHelper.getInstance());
+        }
+        DoorHelper.getInstance().destroyUi();
+    }
+
+    private void addAirNotify() {
         //AirHelper.getInstance().buildUi(new Air_0160_RZC_DaZhong_All(TheApp.getInstance()));
         for (int i = ConstGolf.U_AIR_BEGIN; i < ConstGolf.U_AIR_END; i++) {
             DataCanbus.NOTIFY_EVENTS[i].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
@@ -56,24 +64,32 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
         for (int i = ConstGolf.U_AIR_REAR2; i <= ConstGolf.U_AIR_CYCLE2; i++) {
             DataCanbus.NOTIFY_EVENTS[i].addNotify(AirHelper.SHOW_AND_REFRESH, 0);
         }
-
-        DoorHelper.getInstance().buildUi();
-        for (int i = ConstGolf.U_DOOR_BEGIN; i < ConstGolf.U_DOOR_END; i++) {
-            DataCanbus.NOTIFY_EVENTS[i].addNotify(DoorHelper.getInstance(), 0);
-        }
     }
 
-    @Override
-    public void out() {
-        for (int i = ConstGolf.U_DOOR_BEGIN; i < ConstGolf.U_DOOR_END; i++) {
-            DataCanbus.NOTIFY_EVENTS[i].removeNotify(DoorHelper.getInstance());
-        }
+    private void removeAirNotify() {
         for (int i = ConstGolf.U_AIR_BEGIN; i < ConstGolf.U_AIR_END; i++) {
             DataCanbus.NOTIFY_EVENTS[i].removeNotify(AirHelper.SHOW_AND_REFRESH);
         }
         DataCanbus.NOTIFY_EVENTS[ConstGolf.U_AIR_CLEAR_AIR].removeNotify(AirHelper.SHOW_AND_REFRESH);
         AirHelper.getInstance().destroyUi();
-        DoorHelper.getInstance().destroyUi();
+    }
+
+    @Override
+    public void in() {
+        IModuleCallback callback = ModuleCallbackCanbusProxy.getInstance();
+        for (int i = 0; i < ConstGolf.U_CNT_MAX; i++) {
+            DataCanbus.PROXY.register(callback, i, 1);
+        }
+        this.carId = (DataCanbus.DATA[FinalCanbus.U_CANBUS_ID] >> 16) & 0xFFFF;
+        Log.d(TAG, "in: carId: " + this.carId);
+        addDoorNotify();
+        addAirNotify();
+    }
+
+    @Override
+    public void out() {
+        removeDoorNotify();
+        removeAirNotify();
     }
 
     @Override
