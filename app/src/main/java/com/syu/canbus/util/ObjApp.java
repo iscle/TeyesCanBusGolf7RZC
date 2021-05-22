@@ -23,7 +23,7 @@ public class ObjApp {
     private static InfoView sInfoView;
     private static LocationManager sLocationManager;
     private static PackageManager sPackageManager;
-    private static Point sPoint = new Point();
+    private static final Point sPoint = new Point();
     private static PowerManager sPowerManager;
     private static Resources sResources;
     private static View sRootView;

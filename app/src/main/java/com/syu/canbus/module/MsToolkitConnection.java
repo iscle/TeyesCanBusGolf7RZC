@@ -9,6 +9,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 
 import com.syu.ipc.IRemoteToolkit;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,10 +27,7 @@ public class MsToolkitConnection implements ServiceConnection {
                 Intent intent = new Intent("com.syu.ms.toolkit");
                 intent.setComponent(new ComponentName("com.syu.ms", "app.ToolkitService"));
                 mContext.bindService(intent, MsToolkitConnection.this, Context.BIND_AUTO_CREATE);
-                mHandler.postDelayed(this, new Random().nextInt(3000) + 1000);
-                return;
             }
-            mConnecting = false;
         }
     };
 
@@ -46,6 +44,7 @@ public class MsToolkitConnection implements ServiceConnection {
     @Override
     public synchronized void onServiceConnected(ComponentName name, IBinder service) {
         mRemoteToolkit = IRemoteToolkit.Stub.asInterface(service);
+        mConnecting = false;
         for (ConnectionObserver mConnectionObserver : this.mConnectionObservers) {
             mHandler.post(new OnServiceConnected(mConnectionObserver));
         }
@@ -113,7 +112,7 @@ public class MsToolkitConnection implements ServiceConnection {
         }
     }
 
-    private class OnServiceDisconnected implements Runnable {
+    private static class OnServiceDisconnected implements Runnable {
         private final ConnectionObserver observer;
 
         OnServiceDisconnected(ConnectionObserver observer) {

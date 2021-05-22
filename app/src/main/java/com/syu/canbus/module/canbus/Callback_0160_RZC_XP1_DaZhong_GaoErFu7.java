@@ -76,7 +76,7 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
 
     @Override
     public void in() {
-        IModuleCallback callback = ModuleCallbackCanbusProxy.getInstance();
+        IModuleCallback callback = ModuleCallbackCanbus.getInstance();
         for (int i = 0; i < ConstGolf.U_CNT_MAX; i++) {
             DataCanbus.PROXY.register(callback, i, 1);
         }
@@ -94,7 +94,7 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
 
     @Override
     public void update(int updateCode, int[] ints, float[] flts, String[] strs) throws RemoteException {
-        if  (updateCode < 0 || updateCode > ConstGolf.U_CNT_MAX) {
+        if (updateCode < 0 || updateCode > ConstGolf.U_CNT_MAX) {
             Log.w(TAG, "update: Invalid update code (" + updateCode + ")");
             return;
         }
@@ -126,9 +126,10 @@ public class Callback_0160_RZC_XP1_DaZhong_GaoErFu7 extends CallbackCanbusBase {
                 } else if (value == 0 && Golf7AirActi.mIsFront && Golf7AirActi.mInstance != null) {
                     Golf7AirActi.mInstance.finish();
                     break;
-                } else */{
-                    break;
-                }
+                } else */
+            {
+                break;
+            }
             case ConstGolf.U_JUMP_CARINFO:
                 convDrivingMode(updateCode, ints);
                 break;

@@ -1,12 +1,13 @@
 package com.syu.canbus.util;
 
 import android.os.SystemClock;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class SecondTickThread extends Thread {
     private static final SecondTickThread INSTANCE = new SecondTickThread();
-    private ArrayList<Runnable> ticks = new ArrayList<>();
+    private final ArrayList<Runnable> ticks = new ArrayList<>();
 
     public static SecondTickThread getInstance() {
         return INSTANCE;

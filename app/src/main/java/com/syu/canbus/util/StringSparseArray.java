@@ -44,8 +44,8 @@ public class StringSparseArray<E> implements Cloneable {
         StringSparseArray<E> clone = null;
         try {
             clone = (StringSparseArray) super.clone();
-            clone.mKeys = (String[]) this.mKeys.clone();
-            clone.mValues = (Object[]) this.mValues.clone();
+            clone.mKeys = this.mKeys.clone();
+            clone.mValues = this.mValues.clone();
             return clone;
         } catch (CloneNotSupportedException e) {
             return clone;
@@ -220,10 +220,7 @@ public class StringSparseArray<E> implements Cloneable {
     }
 
     private boolean StringGreater(String left, String right) {
-        if (left != null && left.compareTo(right) > 0) {
-            return true;
-        }
-        return false;
+        return left != null && left.compareTo(right) > 0;
     }
 
     public void append(String key, E value) {

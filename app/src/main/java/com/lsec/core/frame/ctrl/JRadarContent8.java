@@ -2,10 +2,14 @@ package com.lsec.core.frame.ctrl;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.syu.canbus.R;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -27,7 +31,6 @@ public class JRadarContent8 extends View {
     int[][] PX_RML;
     int[][] PX_RMR;
     int[][] PX_RR;
-    private final int RADAR_CNT;
     int[] RC_FL;
     int[] RC_FML;
     int[] RC_FMR;
@@ -36,13 +39,13 @@ public class JRadarContent8 extends View {
     int[] RC_RML;
     int[] RC_RMR;
     int[] RC_RR;
-    private final int[] VALUE;
+    private int[] VALUE;
     private final int[] VALUE_BAK;
     private Bitmap mBitmap;
     private WeakReference<Bitmap> mContentBitmap;
     private boolean mIsPixelGet;
     public int mLintCnt;
-    private Paint mPaint;
+    private final Paint mPaint;
 
     public void initDataLint() {
         this.mLintCnt = 10;
@@ -83,7 +86,6 @@ public class JRadarContent8 extends View {
         super(context);
         this.mContentBitmap = new WeakReference<>(null);
         this.mPaint = new Paint();
-        this.RADAR_CNT = 8;
         this.mLintCnt = -1;
         this.mIsPixelGet = false;
         this.VALUE_BAK = new int[8];
@@ -96,7 +98,6 @@ public class JRadarContent8 extends View {
         super(context, attrs);
         this.mContentBitmap = new WeakReference<>(null);
         this.mPaint = new Paint();
-        this.RADAR_CNT = 8;
         this.mLintCnt = -1;
         this.mIsPixelGet = false;
         this.VALUE_BAK = new int[8];
@@ -109,7 +110,6 @@ public class JRadarContent8 extends View {
         super(context, attrs, defStyle);
         this.mContentBitmap = new WeakReference<>(null);
         this.mPaint = new Paint();
-        this.RADAR_CNT = 8;
         this.mLintCnt = -1;
         this.mIsPixelGet = false;
         this.VALUE_BAK = new int[8];
@@ -157,7 +157,9 @@ public class JRadarContent8 extends View {
         if (b == null) {
             b = Bitmap.createBitmap(1024, 600, Bitmap.Config.ARGB_8888);
             this.mContentBitmap = new WeakReference<>(b);
-            //new Canvas(b).drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.radar_content), 0.0f, 0.0f, this.mPaint);
+            Bitmap drawable = BitmapFactory.decodeResource(getResources(), R.drawable.radar_content);
+            if (drawable != null)
+                new Canvas(b).drawBitmap(drawable, 0.0f, 0.0f, this.mPaint);
             for (int i = 0; i < 8; i++) {
                 this.VALUE_BAK[i] = -1;
             }
@@ -204,7 +206,7 @@ public class JRadarContent8 extends View {
                 render(this.mBitmap, this.VALUE[i], getPX(i));
             }
         }
-        canvas.drawColor(-872415232);
+        canvas.drawColor(Color.BLACK);
         float scaleX = ((float) getWidth()) / 1024.0f;
         float scaleY = ((float) getHeight()) / 600.0f;
         if (scaleX < scaleY) {
@@ -225,20 +227,20 @@ public class JRadarContent8 extends View {
             distance = lintCnt;
         }
         for (int i = 0; i < distance; i++) {
-            if (bitmap.getPixel(pixel[i][0], pixel[i][1]) != 0) {
-                renderPixel(bitmap, pixel[i], 0);
+            if (bitmap.getPixel(pixel[i][0], pixel[i][1]) != Color.TRANSPARENT) {
+                renderPixel(bitmap, pixel[i], Color.TRANSPARENT);
             }
         }
         if (distance == 0) {
             if (bitmap.getPixel(pixel[distance][0], pixel[distance][1]) != -65536) {
-                renderPixel(bitmap, pixel[distance], -65536);
+                renderPixel(bitmap, pixel[distance], -65536); // red
             }
         } else if (distance < lintCnt && bitmap.getPixel(pixel[distance][0], pixel[distance][1]) != -3094464) {
-            renderPixel(bitmap, pixel[distance], -3094464);
+            renderPixel(bitmap, pixel[distance], -3094464); // yellow
         }
         for (int i2 = distance + 1; i2 < lintCnt; i2++) {
             if (bitmap.getPixel(pixel[i2][0], pixel[i2][1]) != -7315440) {
-                renderPixel(bitmap, pixel[i2], -7315440);
+                renderPixel(bitmap, pixel[i2], -7315440); // brown
             }
         }
     }
@@ -287,5 +289,9 @@ public class JRadarContent8 extends View {
         for (int i = 0; i < length; i += 3) {
             bitmap.setPixel(pixel[i], pixel[i + 1], pixel[i + 2]);
         }
+    }
+
+    public void setData(int[] data) {
+        this.VALUE = data;
     }
 }

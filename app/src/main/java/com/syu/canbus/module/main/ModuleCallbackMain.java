@@ -1,6 +1,7 @@
 package com.syu.canbus.module.main;
 
 import android.os.RemoteException;
+
 import com.syu.ipc.IModuleCallback;
 
 public class ModuleCallbackMain extends IModuleCallback.Stub {

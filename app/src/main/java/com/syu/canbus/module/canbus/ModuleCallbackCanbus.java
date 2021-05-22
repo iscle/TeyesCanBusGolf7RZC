@@ -5,13 +5,13 @@ import android.util.Log;
 
 import com.syu.ipc.IModuleCallback;
 
-public class ModuleCallbackCanbusProxy extends IModuleCallback.Stub {
-    private static final String TAG = "ModuleCallbackCanbusPro";
+public class ModuleCallbackCanbus extends IModuleCallback.Stub {
+    private static final String TAG = "ModuleCallbackCanbus";
 
-    private static final ModuleCallbackCanbusProxy INSTANCE = new ModuleCallbackCanbusProxy();
+    private static final ModuleCallbackCanbus INSTANCE = new ModuleCallbackCanbus();
     private CallbackCanbusBase mCallback;
 
-    public static ModuleCallbackCanbusProxy getInstance() {
+    public static ModuleCallbackCanbus getInstance() {
         return INSTANCE;
     }
 
@@ -31,7 +31,7 @@ public class ModuleCallbackCanbusProxy extends IModuleCallback.Stub {
         return mCallback;
     }
 
-    private ModuleCallbackCanbusProxy() {
+    private ModuleCallbackCanbus() {
         // Empty constructor
     }
 

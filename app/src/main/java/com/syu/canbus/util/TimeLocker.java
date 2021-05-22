@@ -24,7 +24,7 @@ public final class TimeLocker implements Runnable {
     public synchronized void lock(int ms) {
         HANDLER.removeCallbacks(this);
         this.mLock = true;
-        HANDLER.postDelayed(this, (long) ms);
+        HANDLER.postDelayed(this, ms);
     }
 
     public synchronized void run() {

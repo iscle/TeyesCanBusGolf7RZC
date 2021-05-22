@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.SystemProperties;
 import android.view.View;
 import android.widget.PopupWindow;
+
 import com.syu.canbus.R;
 import com.syu.canbus.module.IUiNotify;
 import com.syu.canbus.module.canbus.DataCanbus;

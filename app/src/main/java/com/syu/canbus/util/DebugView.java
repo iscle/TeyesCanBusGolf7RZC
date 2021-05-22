@@ -5,21 +5,22 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
 import android.view.WindowManager;
+
 import java.util.Locale;
 
 public class DebugView extends View {
-    private int CELL_HEIGHT = 35;
+    private final int CELL_HEIGHT = 35;
     int[] COLOR = {-65536, -1, -16711936, -256, -16776961};
     private final int MAX = 16;
     private final int TEXT_SIZE = 23;
-    private int[] mColors = new int[16];
+    private final int[] mColors = new int[16];
     private int mCount;
     private boolean mDbg = false;
     private int mLastIndex;
-    private WindowManager.LayoutParams mLp = ToolkitApp.buildOverlayLayoutParams(-1, -1);
+    private final WindowManager.LayoutParams mLp = ToolkitApp.buildOverlayLayoutParams(-1, -1);
     private int mMsgCnt;
-    private String[] mMsgs = new String[16];
-    private Paint mPaint = new Paint();
+    private final String[] mMsgs = new String[16];
+    private final Paint mPaint = new Paint();
 
     public DebugView(Context context) {
         super(context);
@@ -61,13 +62,13 @@ public class DebugView extends View {
             if (data.length - start < length) {
                 length = data.length - start;
             }
-            String msg = String.valueOf(str) + " * ";
+            String msg = str + " * ";
             for (int i = 0; i < length; i++) {
                 String c = Integer.toHexString(data[start + i] & 255).toUpperCase(Locale.CHINA);
                 if (c.length() < 2) {
                     c = "0" + c;
                 }
-                msg = String.valueOf(msg) + c + " ";
+                msg = msg + c + " ";
             }
             HandlerUI.getInstance().post(new MessageHelper(msg));
         }
@@ -78,20 +79,20 @@ public class DebugView extends View {
             if (data.length - start < length) {
                 length = data.length - start;
             }
-            String msg = String.valueOf(str) + " * ";
+            String msg = str + " * ";
             for (int i = 0; i < length; i++) {
                 String c = Integer.toHexString(data[start + i] & 255).toUpperCase(Locale.CHINA);
                 if (c.length() < 2) {
                     c = "0" + c;
                 }
-                msg = String.valueOf(msg) + c + " ";
+                msg = msg + c + " ";
             }
             HandlerUI.getInstance().post(new MessageHelper(msg));
         }
     }
 
     private class MessageHelper implements Runnable {
-        private String mMessage;
+        private final String mMessage;
 
         public MessageHelper(String msg) {
             this.mMessage = msg;

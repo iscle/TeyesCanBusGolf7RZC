@@ -1,6 +1,7 @@
 package com.syu.canbus.module.sound;
 
 import android.os.RemoteException;
+
 import com.syu.ipc.IModuleCallback;
 
 public class ModuleCallbackSound extends IModuleCallback.Stub {

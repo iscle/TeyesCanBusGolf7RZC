@@ -228,49 +228,46 @@ public class DrivingDataActivity extends BaseActivity {
         Log.d(TAG, "updateCarAnimation: data: " + data);
     }
 
-    private final IUiNotify mNotifyCanbus = new IUiNotify() {
-        @Override
-        public void onNotify(int updateCode, int[] ints, float[] flts, String[] strs) {
-            Utils.dumpOnNotify(TAG, updateCode, ints, flts, strs);
-            switch (updateCode) {
-                case ConstGolf.U_AVG_CONSUMPION_SINCE_START_NEW:
-                case ConstGolf.U_AVG_CONSUMPTION_LONG_TERM_NEW:
-                case ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING_NEW:
-                    updateAvgConsumption();
-                    break;
-                case ConstGolf.U_UNIT_CONSUMPTION:
-                    //updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_UNIT_CONSUMPTION]);
-                    break;
-                case ConstGolf.U_RANGE_LEFT_SINCE_START:
-                case ConstGolf.U_RANGE_LEFT_LONG_TERM:
-                case ConstGolf.U_RANGE_LEFT_SINCE_REFUELLING:
-                    updateRangeLeft();
-                    break;
-                case ConstGolf.U_SET_UNIT_DISTANCE:
-                    //updateRangeLeft(DataCanbus.DATA[ConstGolf.U_SET_UNIT_DISTANCE]);
-                    break;
-                case ConstGolf.U_DRIVING_DISTANCE_SINCE_START:
-                case ConstGolf.U_DRIVING_DISTANCE_LONG_TERM:
-                case ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING:
-                    updateDrivingDistance();
-                    break;
-                case ConstGolf.U_DRIVING_TIME_SINCE_START:
-                case ConstGolf.U_DRIVING_TIME_LONG_TERM:
-                case ConstGolf.U_DRIVING_TIME_SINCE_REFUELLING:
-                    updateDrivingTime();
-                    break;
-                case ConstGolf.U_AVG_SPEED_SINCE_START:
-                case ConstGolf.U_AVG_SPEED_LONG_TERM:
-                case ConstGolf.U_AVG_SPEED_SINCE_REFUELLING:
-                    updateAvgSpeed();
-                    break;
-                case ConstGolf.U_UNIT_SPEED:
-                    //updateAvgSpeed(DataCanbus.DATA[ConstGolf.U_UNIT_SPEED]);
-                    break;
-                case ConstGolf.U_SET_REMAINING_OIL:
-                    updateCarAnimation(DataCanbus.DATA[ConstGolf.U_SET_REMAINING_OIL]);
-                    break;
-            }
+    private final IUiNotify mNotifyCanbus = (updateCode, ints, flts, strs) -> {
+        Utils.dumpOnNotify(TAG, updateCode, ints, flts, strs);
+        switch (updateCode) {
+            case ConstGolf.U_AVG_CONSUMPION_SINCE_START_NEW:
+            case ConstGolf.U_AVG_CONSUMPTION_LONG_TERM_NEW:
+            case ConstGolf.U_AVG_CONSUMPTION_SINCE_REFUELLING_NEW:
+                updateAvgConsumption();
+                break;
+            case ConstGolf.U_UNIT_CONSUMPTION:
+                //updateAvgConsumption(DataCanbus.DATA[ConstGolf.U_UNIT_CONSUMPTION]);
+                break;
+            case ConstGolf.U_RANGE_LEFT_SINCE_START:
+            case ConstGolf.U_RANGE_LEFT_LONG_TERM:
+            case ConstGolf.U_RANGE_LEFT_SINCE_REFUELLING:
+                updateRangeLeft();
+                break;
+            case ConstGolf.U_SET_UNIT_DISTANCE:
+                //updateRangeLeft(DataCanbus.DATA[ConstGolf.U_SET_UNIT_DISTANCE]);
+                break;
+            case ConstGolf.U_DRIVING_DISTANCE_SINCE_START:
+            case ConstGolf.U_DRIVING_DISTANCE_LONG_TERM:
+            case ConstGolf.U_DRIVING_DISTANCE_SINCE_REFUELLING:
+                updateDrivingDistance();
+                break;
+            case ConstGolf.U_DRIVING_TIME_SINCE_START:
+            case ConstGolf.U_DRIVING_TIME_LONG_TERM:
+            case ConstGolf.U_DRIVING_TIME_SINCE_REFUELLING:
+                updateDrivingTime();
+                break;
+            case ConstGolf.U_AVG_SPEED_SINCE_START:
+            case ConstGolf.U_AVG_SPEED_LONG_TERM:
+            case ConstGolf.U_AVG_SPEED_SINCE_REFUELLING:
+                updateAvgSpeed();
+                break;
+            case ConstGolf.U_UNIT_SPEED:
+                //updateAvgSpeed(DataCanbus.DATA[ConstGolf.U_UNIT_SPEED]);
+                break;
+            case ConstGolf.U_SET_REMAINING_OIL:
+                updateCarAnimation(DataCanbus.DATA[ConstGolf.U_SET_REMAINING_OIL]);
+                break;
         }
     };
 

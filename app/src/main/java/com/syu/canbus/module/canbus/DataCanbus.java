@@ -7,8 +7,6 @@ public class DataCanbus {
     public static final int[] DATA = new int[FinalCanbus.U_CNT_MAX];
     public static final UiNotifyEvent[] NOTIFY_EVENTS = new UiNotifyEvent[FinalCanbus.U_CNT_MAX];
     public static final RemoteModuleProxy PROXY = new RemoteModuleProxy();
-    public static int carId;
-    public static int sCanbusId;
 
     static {
         for (int i = 0; i < FinalCanbus.U_CNT_MAX; i++) {

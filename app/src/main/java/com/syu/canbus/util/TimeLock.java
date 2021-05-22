@@ -8,10 +8,7 @@ public class TimeLock {
 
     public boolean unlock(int ms) {
         this.cur = SystemClock.uptimeMillis();
-        if (this.cur - this.last >= ((long) ms)) {
-            return true;
-        }
-        return false;
+        return this.cur - this.last >= ((long) ms);
     }
 
     public void reset() {

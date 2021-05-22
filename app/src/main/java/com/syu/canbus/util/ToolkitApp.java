@@ -33,9 +33,6 @@ public class ToolkitApp {
     }
 
     public static boolean isScreenPort() {
-        if (SystemProperties.get("ro.sf.hwrotation", "0").equals("90") || SystemProperties.get("ro.sf.hwrotation", "0").equals("180") || SystemProperties.get("ro.sf.hwrotation", "0").equals("270") || SystemProperties.get("ro.fyt.screen_port", "0").equals("1")) {
-            return true;
-        }
-        return false;
+        return SystemProperties.get("ro.sf.hwrotation", "0").equals("90") || SystemProperties.get("ro.sf.hwrotation", "0").equals("180") || SystemProperties.get("ro.sf.hwrotation", "0").equals("270") || SystemProperties.get("ro.fyt.screen_port", "0").equals("1");
     }
 }

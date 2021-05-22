@@ -2,43 +2,34 @@ package com.syu.canbus;
 
 import com.syu.canbus.module.IUiNotify;
 import com.syu.canbus.module.canbus.DataCanbus;
-import com.syu.canbus.module.canbus.FinalCanbus;
 
 public class DataPack {
     static int mCurrentID = 0;
     static IUiNotify mCurrentNotify = null;
-    static int[] mCurrentUpdatteCode = null;
+    static int[] mCurrentUpdateCode = null;
 
-    static IUiNotify mNotifyCanbus = new IUiNotify() {
-        @Override
-        public void onNotify(int updateCode, int[] ints, float[] flts, String[] strs) {
-            if (DataPack.mCurrentID != DataCanbus.DATA[1000]) {
-                if (!(DataPack.mCurrentNotify == null || DataPack.mCurrentUpdatteCode == null)) {
-                    for (int i : DataPack.mCurrentUpdatteCode) {
-                        DataCanbus.NOTIFY_EVENTS[i].removeNotify(DataPack.mCurrentNotify);
-                    }
-                    DataPack.mCurrentUpdatteCode = null;
+    static IUiNotify mNotifyCanbus = (updateCode, ints, flts, strs) -> {
+        if (DataPack.mCurrentID != DataCanbus.DATA[1000]) {
+            if (DataPack.mCurrentNotify != null && DataPack.mCurrentUpdateCode != null) {
+                for (int i : DataPack.mCurrentUpdateCode) {
+                    DataCanbus.NOTIFY_EVENTS[i].removeNotify(DataPack.mCurrentNotify);
                 }
-                DataPack.mCurrentID = DataCanbus.DATA[1000];
+                DataPack.mCurrentUpdateCode = null;
             }
-            if (Utils.isRZCGolf()) {
-                DataPack.mCurrentNotify = DataPack.mNotifyRZCMQBTireWarn;
-                DataPack.mCurrentUpdatteCode = new int[]{386, 387};
-            }
-            if (!(DataPack.mCurrentUpdatteCode == null || DataPack.mCurrentNotify == null)) {
-                for (int i : DataPack.mCurrentUpdatteCode) {
-                    DataCanbus.NOTIFY_EVENTS[i].addNotify(DataPack.mCurrentNotify, 1);
-                }
+            DataPack.mCurrentID = DataCanbus.DATA[1000];
+        }
+        DataPack.mCurrentNotify = DataPack.mNotifyRZCMQBTireWarn;
+        DataPack.mCurrentUpdateCode = new int[]{386, 387};
+        if (DataPack.mCurrentNotify != null) {
+            for (int i : DataPack.mCurrentUpdateCode) {
+                DataCanbus.NOTIFY_EVENTS[i].addNotify(DataPack.mCurrentNotify, 1);
             }
         }
     };
 
-    static IUiNotify mNotifyRZCMQBTireWarn = new IUiNotify() {
-        @Override
-        public void onNotify(int updateCode, int[] ints, float[] flts, String[] strs) {
-            if (updateCode == 386 || updateCode == 387) {
-                WarnRZCMQBTire.getInstance().showWindowTip(updateCode, DataCanbus.DATA[updateCode]);
-            }
+    static IUiNotify mNotifyRZCMQBTireWarn = (updateCode, ints, flts, strs) -> {
+        if (updateCode == 386 || updateCode == 387) {
+            WarnRZCMQBTire.getInstance().showWindowTip(updateCode, DataCanbus.DATA[updateCode]);
         }
     };
 

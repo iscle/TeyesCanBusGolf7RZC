@@ -53,7 +53,7 @@ public class Print {
         StringBuilder sb = new StringBuilder(length);
         int end = start + length;
         for (int i = start; i < end; i++) {
-            sb.append(String.valueOf((char) data[i]) + " ");
+            sb.append((char) data[i] + " ");
         }
         return sb.toString();
     }

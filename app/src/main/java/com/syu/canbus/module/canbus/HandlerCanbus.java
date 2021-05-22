@@ -8,45 +8,33 @@ import com.syu.canbus.module.IUiNotify;
 public class HandlerCanbus {
     private static final String TAG = "HandlerCanbus";
 
-    private static final IUiNotify NTF_CANBUS_ID = new IUiNotify() {
-        @Override
-        public void onNotify(int updateCode, int[] ints, float[] flts, String[] strs) {
-            Utils.dumpOnNotify(TAG, updateCode, ints, flts, strs);
-            ModuleCallbackCanbusProxy.getInstance().setCallbackCanbus(HandlerCanbus.getCallbackCanbusById(DataCanbus.DATA[updateCode]));
-        }
+    private static final IUiNotify NTF_CANBUS_ID = (updateCode, ints, flts, strs) -> {
+        Utils.dumpOnNotify(TAG, updateCode, ints, flts, strs);
+        ModuleCallbackCanbus.getInstance().setCallbackCanbus(HandlerCanbus.getCallbackCanbusById(DataCanbus.DATA[updateCode]));
     };
 
     public static void update(int updateCode, int[] ints) {
-        if (ints == null || ints.length == 0 || DataCanbus.DATA[updateCode] == ints[0]) {
-            return;
-        }
+        if (ints == null || ints.length == 0 || DataCanbus.DATA[updateCode] == ints[0]) return;
         DataCanbus.DATA[updateCode] = ints[0];
         DataCanbus.NOTIFY_EVENTS[updateCode].onNotify();
     }
 
     public static void update(int updateCode, int value) {
-        if (DataCanbus.DATA[updateCode] == value) {
-            return;
-        }
+        if (DataCanbus.DATA[updateCode] == value) return;
         DataCanbus.DATA[updateCode] = value;
         DataCanbus.NOTIFY_EVENTS[updateCode].onNotify();
     }
 
     public static void update(int updateCode, int[] ints, float[] flts, String[] strs) {
-        if ((ints == null || ints.length == 0) && (strs == null || strs.length == 0)) {
-            return;
-        }
-        if (ints != null && DataCanbus.DATA[updateCode] != ints[0]) {
+        if ((ints == null || ints.length == 0) && (strs == null || strs.length == 0)) return;
+        if (ints != null && ints.length > 0 && DataCanbus.DATA[updateCode] != ints[0]) {
             DataCanbus.DATA[updateCode] = ints[0];
         }
         DataCanbus.NOTIFY_EVENTS[updateCode].onNotify(ints, flts, strs);
     }
 
     public static void canBusId(int updateCode, int value) {
-        Log.d(TAG, "canBusId: updateCode: " + updateCode + ", value: " + value);
-        if (DataCanbus.DATA[updateCode] == value) {
-            return;
-        }
+        if (DataCanbus.DATA[updateCode] == value) return;
         DataCanbus.DATA[updateCode] = value;
         DataCanbus.NOTIFY_EVENTS[updateCode].onNotify();
     }
@@ -67,10 +55,8 @@ public class HandlerCanbus {
     }
 
     public static CallbackCanbusBase getCallbackCanbusById(int id) {
-        DataCanbus.sCanbusId = id;
         int canbusId = id & 0xFFFF;
         int carId = (id >> 16) & 0xFFFF;
-        DataCanbus.carId = carId;
 
         Log.d(TAG, "getCallbackCanbusById: canbusId: " + canbusId + ", carId: " + carId);
 
@@ -79,9 +65,8 @@ public class HandlerCanbus {
             return null;
         }
 
-
         if (canbusId != 160) {
-            Log.w(TAG, "getCallbackCanbusById: canbus id is not 160! This might lead to undefined behaviour...");
+            Log.w(TAG, "getCallbackCanbusById: canbus id is not 160! Undefined behaviour...");
         }
         Log.d(TAG, "getCallbackCanbusById: returning Golf 7 callback");
         return new Callback_0160_RZC_XP1_DaZhong_GaoErFu7();

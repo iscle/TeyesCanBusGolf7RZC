@@ -86,7 +86,7 @@ public class DoorHelper implements IUiNotify, Runnable {
             }
         }
     };
-    private Runnable mHideWindow = new Runnable() {
+    private final Runnable mHideWindow = new Runnable() {
         /* class com.syu.ui.door.DoorHelper.AnonymousClass1 */
 
         public void run() {

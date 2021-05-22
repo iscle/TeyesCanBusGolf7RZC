@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //binding = ActivityMainBinding.inflate(getLayoutInflater());
         //setContentView(binding.getRoot());
-        startActivity(new Intent(this, DrivingDataActivity.class));
+        startActivity(new Intent(this, RadarActivity.class));
         finishAffinity();
     }
 }

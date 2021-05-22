@@ -3,6 +3,7 @@ package com.syu.canbus.util;
 import android.content.Context;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.syu.canbus.R;
 
 public class MyToast {

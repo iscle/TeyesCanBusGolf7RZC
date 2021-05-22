@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DrivingDataActivity" />
+        <activity android:name=".RadarActivity" />
     </application>
 
 </manifest>

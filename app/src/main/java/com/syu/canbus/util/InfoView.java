@@ -4,13 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class InfoView extends View {
     private boolean mAddToWindow = false;
-    private ArrayList<Chunk> mInfos = new ArrayList<>(10);
-    private Paint mPaint = new Paint();
+    private final ArrayList<Chunk> mInfos = new ArrayList<>(10);
+    private final Paint mPaint = new Paint();
 
     public InfoView(Context context) {
         super(context);
@@ -63,12 +64,12 @@ public class InfoView extends View {
 
     /* access modifiers changed from: private */
     public class Chunk implements Runnable {
-        private int mBgColor;
-        private int mBgHeight;
+        private final int mBgColor;
+        private final int mBgHeight;
         private int mIndex;
-        private String mText;
+        private final String mText;
         Paint.Align mTextAlign;
-        private int mTextColor;
+        private final int mTextColor;
         private int mTextSize;
 
         /* synthetic */ Chunk(InfoView infoView, int i, String str, Paint.Align align, int i2, int i3, int i4, int i5, Chunk chunk) {
